@@ -1,4 +1,3 @@
-// Start page: input for minutes and seconds, start button
 'use client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

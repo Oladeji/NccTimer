@@ -1,3 +1,4 @@
+import Link from "next/link";
 // Flash message page: displays a flashing message
 export default function FlashPage() {
   return (
@@ -30,14 +31,14 @@ export default function FlashPage() {
           animation: 'colorPulse 1.2s infinite',
         }}
       >
-        Time's Up!
+            Time&apos;s Up!
       </h1>
      
      
      
       
  </div>
-  <a href="/" className="mt-8 underline text-blue-400">Back to Start</a>
+  <Link href="/" className="mt-8 underline text-blue-400">Back to Start</Link>
 
     </main>
      
