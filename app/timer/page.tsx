@@ -1,6 +1,8 @@
-"use client";
+// Needed for hooks in TimerPage
 import { useEffect, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+
+import { Suspense } from "react";
 
 function formatTime(totalSeconds: number) {
   const m = Math.floor(totalSeconds / 60)
@@ -10,7 +12,15 @@ function formatTime(totalSeconds: number) {
   return `${m}:${s}`;
 }
 
-export default function TimerPage() {
+export default function TimerPageWrapper() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TimerPage />
+    </Suspense>
+  );
+}
+
+function TimerPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialMinutes = parseInt(searchParams.get("m") || "0", 10);
@@ -39,7 +49,6 @@ export default function TimerPage() {
     };
   }, [running, timeLeft, router]);
 
-
   function handleSettingsSave(e: React.FormEvent) {
     e.preventDefault();
     setTimeLeft((t) => t + addMinutes * 60 + addSeconds);
@@ -63,7 +72,6 @@ export default function TimerPage() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
         </svg>
       </button>
-
 
       <h1 className="text-3xl font-bold mb-4">{heading}</h1>
       <div
